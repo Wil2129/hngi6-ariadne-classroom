@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-$host = 'localhost';
-$port = '3306';
-$dbname = 'ariadne_classroom';
-$username = 'root';
-$password = 'azerty';
+$host="db4free.net";
+$port = "3306";
+$dbname = "ariadne";
+$username = "ariadne";
+$password = "azerty123";
 
-$db = NULL;
+$db = null;
 try {
     $db = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $username, $password, array(
         PDO::ATTR_PERSISTENT => true,
@@ -16,4 +16,3 @@ try {
 } catch (PDOException $e) {
     echo 'Database connection failed: ' . $e->getMessage();
 }
-?>

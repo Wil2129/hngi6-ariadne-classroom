@@ -8,24 +8,24 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema ariadne_classroom
+-- Schema ariadne
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `ariadne_classroom` ;
+DROP SCHEMA IF EXISTS `ariadne` ;
 
 -- -----------------------------------------------------
--- Schema ariadne_classroom
+-- Schema ariadne
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `ariadne_classroom` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `ariadne` DEFAULT CHARACTER SET utf8 ;
 SHOW WARNINGS;
-USE `ariadne_classroom` ;
+USE `ariadne` ;
 
 -- -----------------------------------------------------
--- Table `ariadne_classroom`.`users`
+-- Table `ariadne`.`users`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ariadne_classroom`.`users` ;
+DROP TABLE IF EXISTS `ariadne`.`users` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `ariadne_classroom`.`users` (
+CREATE TABLE IF NOT EXISTS `ariadne`.`users` (
   `uid` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(32) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
@@ -35,25 +35,25 @@ CREATE TABLE IF NOT EXISTS `ariadne_classroom`.`users` (
   PRIMARY KEY (`uid`));
 
 SHOW WARNINGS;
-CREATE UNIQUE INDEX `email_UNIQUE` ON `ariadne_classroom`.`users` (`email` ASC) VISIBLE;
+CREATE UNIQUE INDEX `email_UNIQUE` ON `ariadne`.`users` (`email` ASC) VISIBLE;
 
 SHOW WARNINGS;
-CREATE UNIQUE INDEX `phone_UNIQUE` ON `ariadne_classroom`.`users` (`phone` ASC) VISIBLE;
+CREATE UNIQUE INDEX `phone_UNIQUE` ON `ariadne`.`users` (`phone` ASC) VISIBLE;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `ariadne_classroom`.`teachers`
+-- Table `ariadne`.`teachers`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ariadne_classroom`.`teachers` ;
+DROP TABLE IF EXISTS `ariadne`.`teachers` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `ariadne_classroom`.`teachers` (
+CREATE TABLE IF NOT EXISTS `ariadne`.`teachers` (
   `teacher_id` INT NOT NULL,
   PRIMARY KEY (`teacher_id`),
   CONSTRAINT `fk_teachers_users1`
     FOREIGN KEY (`teacher_id`)
-    REFERENCES `ariadne_classroom`.`users` (`uid`)
+    REFERENCES `ariadne`.`users` (`uid`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -61,17 +61,17 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `ariadne_classroom`.`students`
+-- Table `ariadne`.`students`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ariadne_classroom`.`students` ;
+DROP TABLE IF EXISTS `ariadne`.`students` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `ariadne_classroom`.`students` (
+CREATE TABLE IF NOT EXISTS `ariadne`.`students` (
   `student_id` INT NOT NULL,
   PRIMARY KEY (`student_id`),
   CONSTRAINT `fk_students_users`
     FOREIGN KEY (`student_id`)
-    REFERENCES `ariadne_classroom`.`users` (`uid`)
+    REFERENCES `ariadne`.`users` (`uid`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -79,12 +79,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `ariadne_classroom`.`classrooms`
+-- Table `ariadne`.`classrooms`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ariadne_classroom`.`classrooms` ;
+DROP TABLE IF EXISTS `ariadne`.`classrooms` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `ariadne_classroom`.`classrooms` (
+CREATE TABLE IF NOT EXISTS `ariadne`.`classrooms` (
   `classroom_id` INT NOT NULL AUTO_INCREMENT,
   `teacher_id` INT NOT NULL,
   `name` VARCHAR(45) NOT NULL,
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `ariadne_classroom`.`classrooms` (
   PRIMARY KEY (`classroom_id`, `teacher_id`),
   CONSTRAINT `fk_classrooms_teachers1`
     FOREIGN KEY (`teacher_id`)
-    REFERENCES `ariadne_classroom`.`teachers` (`teacher_id`)
+    REFERENCES `ariadne`.`teachers` (`teacher_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -102,12 +102,12 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `ariadne_classroom`.`items`
+-- Table `ariadne`.`items`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ariadne_classroom`.`items` ;
+DROP TABLE IF EXISTS `ariadne`.`items` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `ariadne_classroom`.`items` (
+CREATE TABLE IF NOT EXISTS `ariadne`.`items` (
   `item_id` INT NOT NULL AUTO_INCREMENT,
   `classroom_id` INT NOT NULL,
   `teacher_id` INT NOT NULL,
@@ -117,55 +117,55 @@ CREATE TABLE IF NOT EXISTS `ariadne_classroom`.`items` (
   PRIMARY KEY (`item_id`, `classroom_id`, `teacher_id`),
   CONSTRAINT `fk_items_classrooms1`
     FOREIGN KEY (`classroom_id` , `teacher_id`)
-    REFERENCES `ariadne_classroom`.`classrooms` (`classroom_id` , `teacher_id`)
+    REFERENCES `ariadne`.`classrooms` (`classroom_id` , `teacher_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_items_classrooms1_idx` ON `ariadne_classroom`.`items` (`classroom_id` ASC, `teacher_id` ASC) VISIBLE;
+CREATE INDEX `fk_items_classrooms1_idx` ON `ariadne`.`items` (`classroom_id` ASC, `teacher_id` ASC) VISIBLE;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `ariadne_classroom`.`classrooms_have_students`
+-- Table `ariadne`.`classrooms_have_students`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ariadne_classroom`.`classrooms_have_students` ;
+DROP TABLE IF EXISTS `ariadne`.`classrooms_have_students` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `ariadne_classroom`.`classrooms_have_students` (
+CREATE TABLE IF NOT EXISTS `ariadne`.`classrooms_have_students` (
   `classroom_id` INT NOT NULL,
   `teacher_id` INT NOT NULL,
   `student_id` INT NOT NULL,
   PRIMARY KEY (`classroom_id`, `teacher_id`, `student_id`),
   CONSTRAINT `fk_classrooms_has_students_classrooms1`
     FOREIGN KEY (`classroom_id` , `teacher_id`)
-    REFERENCES `ariadne_classroom`.`classrooms` (`classroom_id` , `teacher_id`)
+    REFERENCES `ariadne`.`classrooms` (`classroom_id` , `teacher_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_classrooms_has_students_students1`
     FOREIGN KEY (`student_id`)
-    REFERENCES `ariadne_classroom`.`students` (`student_id`)
+    REFERENCES `ariadne`.`students` (`student_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_classrooms_has_students_students1_idx` ON `ariadne_classroom`.`classrooms_have_students` (`student_id` ASC) VISIBLE;
+CREATE INDEX `fk_classrooms_has_students_students1_idx` ON `ariadne`.`classrooms_have_students` (`student_id` ASC) VISIBLE;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_classrooms_has_students_classrooms1_idx` ON `ariadne_classroom`.`classrooms_have_students` (`classroom_id` ASC, `teacher_id` ASC) VISIBLE;
+CREATE INDEX `fk_classrooms_has_students_classrooms1_idx` ON `ariadne`.`classrooms_have_students` (`classroom_id` ASC, `teacher_id` ASC) VISIBLE;
 
 SHOW WARNINGS;
-USE `ariadne_classroom`;
+USE `ariadne`;
 
 DELIMITER $$
 
-USE `ariadne_classroom`$$
-DROP TRIGGER IF EXISTS `ariadne_classroom`.`users_AFTER_INSERT` $$
+USE `ariadne`$$
+DROP TRIGGER IF EXISTS `ariadne`.`users_AFTER_INSERT` $$
 SHOW WARNINGS$$
-USE `ariadne_classroom`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `ariadne_classroom`.`users_AFTER_INSERT` AFTER INSERT ON `users` FOR EACH ROW
+USE `ariadne`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `ariadne`.`users_AFTER_INSERT` AFTER INSERT ON `users` FOR EACH ROW
 BEGIN
 	IF NEW.`type` = 'teacher' THEN
 		INSERT INTO `teachers` SET `teacher_id` = NEW.`uid`;
