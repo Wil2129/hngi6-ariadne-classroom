@@ -1,0 +1,141 @@
+* {
+    font-weight: bold
+}
+
+body {
+    background-image: url('../images/organic-large.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right top;
+    background-size: auto 100%;
+}
+
+/* Main content */
+
+.main {
+    height: 100%;
+    width: 100%;
+    background-image: url('../images/students.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 70% 50%;
+    background-size: auto 50%;
+    display: flex;
+    align-items: center;
+}
+
+.get-started-block {
+    margin-left: 10%;
+}
+
+.learn {
+    font-size: 3.5em;
+    color: darkorange;
+    text-shadow: -0.33px -0.33px 0 #000, 0.33px -0.33px 0 #000, -0.33px 0.33px 0 #000, 0.33px 0.33px 0 #000;
+    margin: 0 0 3.5vh 0;
+}
+
+.get-started-text {
+    font-size: 1.5em;
+    color: midnightblue;
+    margin: 0 0 2.3125vh 0;
+}
+
+.get-started-block button {
+    color: white;
+    font-size: 1.25em;
+    text-transform: uppercase;
+    border-radius: 8px;
+    border: none;
+    background-color: darkorange;
+    padding: 2.25vh 2.5vw;
+    margin-right: 3.5vw;
+}
+
+/* Responsiveness */
+
+@media screen and (max-width: 1024px) {
+    .main {
+        background-position: 75% 50%;
+        background-size: auto 40%;
+    }
+
+    .learn {
+        font-size: 3em;
+    }
+
+    .get-started-text {
+        font-size: 1.4em;
+    }
+
+    .get-started-block button {
+        font-size: 1.2em;
+        padding: 2vh 2.3vw;
+    }
+
+}
+
+/* Mobile Screens */
+
+@media screen and (max-width: 800px) {
+    .main {
+        background-position: 80% 50%;
+        background-size: auto 33%;
+    }
+
+    .get-started-block {
+        margin-left: 5%;
+    }
+
+    .learn {
+        font-size: 2.5em;
+        text-shadow: -0.25px -0.25px 0 #000, 0.25px -0.25px 0 #000, -0.33px 0.25px 0 #000, 0.25px 0.25px 0 #000;
+    }
+
+    .get-started-text {
+        font-size: 1.3em;
+    }
+
+    .get-started-block button {
+        font-size: 1.1em;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .main {
+        background-position: 40% 30%;
+        background-size: auto 30%;
+        align-items: flex-end;
+        justify-content: center;
+    }
+
+    .get-started-block {
+        margin-left: 5%;
+    }
+
+    .learn {
+        font-size: 2em;
+        color: darkorange;
+        margin: 0 0 3vh;
+    }
+
+    .get-started-text {
+        font-size: 1.5em;
+        margin: 0 0 2vh 0;
+    }
+
+    .get-started-block button {
+        font-size: 1em;
+        padding: 1.5vh 2vw;
+        margin: 0 3.5vw 13vh 0;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .main {
+        background-position: 40% 30%;
+        background-size: 67% auto;
+        align-items: flex-end;
+        justify-content: center;
+    }
+}

@@ -12,7 +12,7 @@ require_once 'models/Item.php';
 $currentUser = NULL;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['sign_in'])) {
+    if (isset($_POST['sign-in'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
         $type = $_POST['type'];
@@ -24,13 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     setcookie("CurrentUser", $currentUser);
                 }
                 $_SESSION['current_user'] = &$currentUser;
-                header('Location: ../frontend/welcome.php');
+                header('Location: ../home.php');
                 exit;
             } else {
 
             }
         }
-    } elseif (isset($_POST['sign_up'])) {
+    } elseif (isset($_POST['sign-up'])) {
         $name = $_POST['name'];
         $email = $_POST['email'];
         $password1 = $_POST['password1'];
@@ -39,26 +39,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (Auth::validateName($name) and Auth::validateEmail($email) and Auth::confirmPasswords($password1, $password2)) {
             $signUp = Auth::signUp($name,$email, md5($password1), $type);
             if ($signUp) {
-                header('Location: ../frontend/sign_in.php');
+                header('Location: ../signin.php');
                 exit;
             } else {
 
             }
         }
-    } elseif (isset($_POST['create_classroom'])) {
+    } elseif (isset($_POST['create-classroom'])) {
         $name = $_POST['name'];
         $description = $_POST['description'];
         if (Auth::validateInput($name)) {
             Auth::validateInput($description);
             $classroom = createClassroom($_SESSION['current_user'], $name, $description);
             if ($signUp) {
-                header('Location: ../frontend/home.php');
+                header('Location: ../home.php');
                 exit;
             } else {
 
             }
         }
-    } elseif (isset($_POST['add_classroom_item'])) {
+    } elseif (isset($_POST['add-item'])) {
         $title = $_POST['title'];
         $content = $_POST['content'];
         $classroom = getClassroom($_POST['classroom_id']);
@@ -71,17 +71,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             Auth::validateInput($content);
             $item = addItemToClassroom($_SESSION['current_user'], $classroom, $title, $content,$fileUrl);
             if ($item) {
-                header('Location: ../frontend/home.php');
+                header('Location: ../home.php');
                 exit;
             } else {
 
             }
         }
-    } elseif (isset($_POST['register_to_classroom'])) {
+    } elseif (isset($_POST['classroom-signup'])) {
         $classroom = getClassroom($_POST['classroom_id']);
         $registerToClassroom = registerStudentToClassroom($_SESSION['current_user'], $classroom);
         if ($registerToClassroom) {
-            header('Location: ../frontend/home.php');
+            header('Location: ../home.php');
             exit;
         } else {
 

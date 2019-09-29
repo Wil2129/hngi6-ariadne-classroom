@@ -1,0 +1,171 @@
+body {
+    background-image: url('../images/background.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    position: relative;
+}
+
+/* Main content */
+
+.form {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.form h1 {
+    color: darkblue;
+}
+
+.form h1+p {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+input,
+select,
+button {
+    font-size: 0.875em;
+    padding: 0.5vh 1vw;
+    height: 40px;
+    width: 336px;
+    border: 0.5px solid rgba(127, 127, 127, 0.33);
+    border-radius: 4px;
+    margin-bottom: 1.75vh;
+}
+
+select {
+    background-color: white;
+}
+
+select,
+button {
+    color: dimgray;
+}
+
+select option {
+    padding: 0.5vh 1vw;
+    height: 40px;
+}
+
+select+p {
+    font-size: 0.8em;
+}
+
+select+p span a {
+    color: darkblue;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+button {
+    border: none;
+}
+
+form+p {
+    font-size: 0.8em;
+}
+
+form+p span a {
+    margin-left: 0.8vw;
+    font-weight: bold;
+    color: darkblue;
+    text-decoration: none;
+}
+
+/* Responsiveness */
+
+@media screen and (max-width: 1280px) {
+
+    input,
+    select,
+    button {
+        width: 25vw;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+
+    input,
+    select,
+    button {
+        width: 100%;
+    }
+}
+
+/* Tablet */
+
+@media screen and (max-width: 800px) {
+    body {
+        background-size: auto 125%;
+    }
+
+    .form {
+        background-color: white;
+        left: 50%;
+        right: 0;
+        box-shadow: 0 4px 8px rgba(127, 127, 127, 0.5);
+        border-radius: 6px;
+        width: 75%;
+        padding: 24px;
+    }
+
+    input,
+    select,
+    button {
+        height: 5vh;
+    }
+}
+
+/* Mobile Screens */
+
+@media screen and (max-width: 600px) {
+    body {
+        background-size: 200% 100%;
+    }
+}
+
+/* Landscape mode */
+
+@media screen and (max-height: 720px) {
+    .form {
+        top: 57%;
+    }
+
+    .form h1 {
+        font-size: 2em;
+    }
+
+    .form h1+p {
+        font-size: 0.875em;
+    }
+
+    input,
+    select,
+    button {
+        font-size: 0.8em;
+        height: 30px;
+        margin-bottom: 1.5vh;
+    }
+}
+
+@media screen and (max-height: 480px) and (max-width: 800px) {
+    body {
+        position: static;
+    }
+
+    .form {
+        position: static;
+        margin: 65% 50% 0 50%;
+    }
+
+    input,
+    select,
+    button {
+        height: 40px;
+    }
+}

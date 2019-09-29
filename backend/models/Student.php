@@ -8,7 +8,7 @@ class Student extends User
 {
     const TYPE = 'student';
 
-    private $type = self::TYPE;
+    protected $type = self::TYPE;
     private $studentId;
     private $classrooms;
 

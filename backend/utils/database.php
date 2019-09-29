@@ -1,12 +1,13 @@
 <?php
 declare(strict_types=1);
 
-$host = '';
+$host = 'localhost';
 $port = '3306';
-$dbname = '';
+$dbname = 'ariadne_classroom';
 $username = 'root';
-$password = '';
+$password = 'azerty';
 
+$db = NULL;
 try {
     $db = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $username, $password, array(
         PDO::ATTR_PERSISTENT => true,

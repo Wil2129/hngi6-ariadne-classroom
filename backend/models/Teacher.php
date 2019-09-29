@@ -8,7 +8,7 @@ class Teacher extends User
 {
     const TYPE = 'teacher';
 
-    private $type = self::TYPE;
+    protected $type = self::TYPE;
     private $teacherId;
     private $classrooms;
 
@@ -30,9 +30,9 @@ class Teacher extends User
         return $this->classrooms;
     }
 
-    public function createClassroom(int $classroomId, string $name, string $description = NULL): void
+    public function createClassroom(int $classroomId, string $name, string $category = null, string $level = null, string $description = NULL): void
     {
-        $classroom = new Classroom($classroomId, $this->teacherId, $name, $description);
+        $classroom = new Classroom($classroomId, $this->teacherId, $name, $category, $level, $description);
         $this->classrooms[] = $classroom;
     }
 

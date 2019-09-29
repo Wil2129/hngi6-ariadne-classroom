@@ -1,22 +1,21 @@
 <?php
 declare(strict_types=1);
 require_once "database.php";
-require_once "../models/User.php";
-require_once "../models/Teacher.php";
-require_once "../models/Student.php";
-require_once "../models/Classroom.php";
-require_once "../models/Item.php";
+require_once(__DIR__.'/../models/User.php');
+require_once(__DIR__.'/../models/Teacher.php');
+require_once(__DIR__.'/../models/Student.php');
+require_once(__DIR__.'/../models/Classroom.php');
+require_once(__DIR__.'/../models/Item.php');
 
-
-function createClassroom(Teacher &$teacher, string $name, string $description = NULL): bool
+function createClassroom(Teacher &$teacher, string $name, string $category = null, string $level = null, string $description = NULL): bool
 {
     $teacherId = $teacher->getId();
     try {
-        $stmt = $db->prepare("INSERT INTO classrooms (teacher_id, name, description) VALUES (:teacher_id, :name, :description)");
-        $stmt->execute(array(':teacher_id' => $teacherId, ':name' => $name, ':description' => $description));
+        $stmt = $GLOBALS['db']->prepare("INSERT INTO classrooms (teacher_id, name, category, level, description) VALUES (:teacher_id, :name, :category, :level, :description)");
+        $stmt->execute(array(':teacher_id' => $teacherId, ':name' => $name, ':category' => $category, ':level' => $level, ':description' => $description));
 
-        $id = $db->lastInsertId();
-        $teacher->createClassroom($id, $name, $description);
+        $id = (int) $GLOBALS['db']->lastInsertId();
+        $teacher->createClassroom($id, $name, $category, $level, $description);
 
         return TRUE;
     } catch (PDOException $e) {
@@ -30,10 +29,10 @@ function addItemToClassroom(Teacher &$teacher, Classroom &$classroom, string $ti
     $teacherId = $teacher->getId();
     $classroomId = $classroom->getId();
     try {
-        $stmt = $db->prepare("INSERT INTO items (classroom_id, teacher_id, title, content, files_url) VALUES (:classroom_id, :teacher_id, :title, :content, :files_url)");
+        $stmt = $GLOBALS['db']->prepare("INSERT INTO items (classroom_id, teacher_id, title, content, files_url) VALUES (:classroom_id, :teacher_id, :title, :content, :files_url)");
         $stmt->execute(array(':classroom_id' => $classroomId, ':teacher_id' => $teacherId, ':title' => $title, ':content' => $content, ':files_url' => $filesUrl));
 
-        $id = $db->lastInsertId();
+        $id = (int) $GLOBALS['db']->lastInsertId();
         $teacher->addItemToClassroom($id,  $classroom, $title, $content, $filesUrl);
 
         return TRUE;
@@ -50,7 +49,7 @@ function registerStudentToClassroom(Classroom &$classroom, Student &$student): b
     $studentId = $student->getId();
     
     try {
-        $stmt = $db->prepare("INSERT INTO classrooms_have_students (classroom_id, teacher_id, student_id) VALUES (:classroom_id, :teacher_id, :student_id)");
+        $stmt = $GLOBALS['db']->prepare("INSERT INTO classrooms_have_students (classroom_id, teacher_id, student_id) VALUES (:classroom_id, :teacher_id, :student_id)");
         $stmt->execute(array(':classroom_id' => $classroomId, ':teacher_id' => $teacherId, ':student_id' => $studentId));
 
         $student->registerToClassroom($classroom);
@@ -65,15 +64,19 @@ function registerStudentToClassroom(Classroom &$classroom, Student &$student): b
 function getClassroom(string $classroomId): ?Classroom
 {
     try {
-        $stmt = $db->prepare("SELECT * FROM classrooms WHERE classroom_id = :classroom_id");
+        $stmt = $GLOBALS['db']->prepare("SELECT * FROM classrooms WHERE classroom_id = :classroom_id");
         $stmt->execute(array(':classroom_id' => $classroomId));
 
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
         while ($row = $stmt->fetch()) {
-            return new Classroom($row['classroom_id'], $row['teacher_id'], $row['name'], $row['description']);
+            return new Classroom((int) $row['classroom_id'], $row['teacher_id'], $row['name'], $row['category'], $row['level'], $row['description']);
         }
+
+        return NULL;
     } catch (PDOException $e) {
         echo "Could not sign in user: " . $e->getMessage();
+
+        return NULL;
     }
 }
 
