@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    background-image: url('../images/background.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+/* Main content */
+
+
+
+/* Responsiveness */
+
+@media screen and (max-width: 1280px) {}
+
+@media screen and (max-width: 1024px) {}
+
+/* Tablet */
+
+@media screen and (max-width: 800px) {
+    body {
+        background-size: auto 125%;
+    }
+
+}
+
+/* Mobile Screens */
+
+@media screen and (max-width: 600px) {
+    body {
+        background-size: 200% 100%;
+    }
+
+}
+
+/* Landscape mode */
+
+@media screen and (max-height: 720px) {}
+
+@media screen and (max-height: 480px) and (max-width: 640px) {
+    body {
+        position: static;
+    }
+
+}
