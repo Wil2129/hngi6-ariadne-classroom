@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-$host="localhost";
+$host="db4free.net";
 $port = "3306";
-$dbname = "ariadne_classroom";
-$username = "root";
-$password = "azerty";
+$dbname = "ariadne";
+$username = "ariadne";
+$password = "azerty123";
 
 $db = null;
 try {
