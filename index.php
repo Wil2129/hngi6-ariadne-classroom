@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 if (isset($_COOKIE["CurrentUser"]) or isset($_SESSION['current_user'])) {
-    header('Location: home.php');
+    header('Location: home');
 }
 
 require_once "frontend/index.html";

@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     setcookie("CurrentUser", serialize($currentUser), time()+60*60*24*30);
                 }
                 $_SESSION['current_user'] = &$currentUser;
-                header('Location: ../index.php');
+                header('Location: ../index');
                 exit;
             } else {
 
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (Auth::validateName($name) and Auth::validateEmail($email) and Auth::confirmPasswords($password1, $password2)) {
             $signUp = Auth::signUp($name,$email, md5($password1), $type);
             if ($signUp) {
-                header('Location: ../signin.php');
+                header('Location: ../signin');
                 exit;
             } else {
 
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             Auth::validateInput($description);
             $classroom = createClassroom($_SESSION['current_user'], $name, $description);
             if ($signUp) {
-                header('Location: ../home.php');
+                header('Location: ../home');
                 exit;
             } else {
 
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             Auth::validateInput($content);
             $item = addItemToClassroom($_SESSION['current_user'], $classroom, $title, $content,$fileUrl);
             if ($item) {
-                header('Location: ../home.php');
+                header('Location: ../home');
                 exit;
             } else {
 
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $classroom = getClassroom($_POST['classroom_id']);
         $registerToClassroom = registerStudentToClassroom($_SESSION['current_user'], $classroom);
         if ($registerToClassroom) {
-            header('Location: ../home.php');
+            header('Location: ../home');
             exit;
         } else {
 
