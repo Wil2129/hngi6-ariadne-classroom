@@ -20,10 +20,10 @@ class Auth
                 $user = new Teacher($id, $name, $email, $password);
             }
 
-            return true;
+            return TRUE;
         } catch (PDOException $e) {
             echo "Could not register user into database: " . $e->getMessage();
-            return false;
+            return FALSE;
         }
     }
 
@@ -54,9 +54,9 @@ class Auth
     {
         $input = htmlspecialchars(stripslashes(trim($input)));
         if (empty($input)) {
-            return false;
+            return FALSE;
         } else {
-            return true;
+            return TRUE;
         }
     }
 
@@ -64,39 +64,42 @@ class Auth
     {
         if (Auth::validateInput($name)) {
             if (!preg_match("/^[a-zA-Z'\s]+$/", $name)) {
-                return false;
+                return FALSE;
             } else {
-                return true;
+                return TRUE;
             }
         }
+        return FALSE;
     }
 
     public static function validateEmail(string &$email): bool
     {
         if (Auth::validateInput($email)) {
             if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                return true;
+                return TRUE;
             } else {
-                return false;
+                return FALSE;
             }
         }
+        return FALSE;
     }
 
     public static function validatePassword(string $password): bool
     {
         if (strlen($password) >= 6) {
-            return true;
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 
     public static function confirmPasswords(string &$password1, string &$password2): bool
     {
         if (($password1 === $password2) and Auth::validatePassword($password1)) {
-            return true;
+            return TRUE;
         } else {
-            return false;
+            return FALSE;
         }
     }
 }
+?>

@@ -39,10 +39,6 @@ button {
 
 select {
     background-color: white;
-}
-
-select,
-button {
     color: dimgray;
 }
 
@@ -64,6 +60,10 @@ select+p span a {
 
 button {
     border: none;
+    background-color: darkorange;
+    text-transform: uppercase;
+    color: white;
+    font-weight: bold;
 }
 
 form+p {

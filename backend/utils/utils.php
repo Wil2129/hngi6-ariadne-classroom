@@ -80,7 +80,7 @@ function getClassroom(string $classroomId): ?Classroom
     }
 }
 
-function cast($object, $className) 
+function cast($object, $className): object
 { 
     return unserialize(sprintf('O:%d:"%s"%s', strlen($className), $className, strstr(strstr(serialize($object), '"'), ':'))); 
 } 

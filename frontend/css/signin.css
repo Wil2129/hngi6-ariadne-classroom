@@ -25,7 +25,7 @@ body {
     font-weight: bold;
 }
 
-input,
+input:not(#remember),
 select,
 button {
     font-size: 0.875em;
@@ -39,10 +39,6 @@ button {
 
 select {
     background-color: white;
-}
-
-select,
-button {
     color: dimgray;
 }
 
@@ -51,14 +47,32 @@ select option {
     height: 40px;
 }
 
-select+p {
-    color: darkblue;
+select+div{
+    text-align: start;
+    padding-left: 8px;
+    margin-top: 12px;
+    margin-bottom: 24px;
     font-size: 0.8em;
+}
+
+#remember, #remember+label, select+div>a {
+    vertical-align: middle;
+}
+
+select+div>a {
+    margin-top: 2px;
+    text-decoration: none;
+    color: darkblue;
     font-weight: bold;
+    float: right;
 }
 
 button {
     border: none;
+    background-color: darkorange;
+    text-transform: uppercase;
+    color: white;
+    font-weight: bold;
 }
 
 form+p {
@@ -76,7 +90,7 @@ form+p span a {
 
 @media screen and (max-width: 1280px) {
 
-    input,
+    input:not(#remember),
     select,
     button {
         width: 25vw;
@@ -85,7 +99,7 @@ form+p span a {
 
 @media screen and (max-width: 1024px) {
 
-    input,
+    input:not(#remember),
     select,
     button {
         width: 100%;
@@ -109,7 +123,7 @@ form+p span a {
         padding: 24px;
     }
 
-    input,
+    input:not(#remember),
     select,
     button {
         height: 5vh;
@@ -139,7 +153,7 @@ form+p span a {
         font-size: 0.875em;
     }
 
-    input,
+    input:not(#remember),
     select,
     button {
         font-size: 0.8em;
@@ -158,7 +172,7 @@ form+p span a {
         margin: 50% 50% 0 50%;
     }
 
-    input,
+    input:not(#remember),
     select,
     button {
         height: 40px;

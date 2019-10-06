@@ -11,20 +11,25 @@ require_once 'models/Item.php';
 
 $currentUser = NULL;
 
+if (isset($_COOKIE["CurrentUser"])) {
+    $currentUser = unserialize($_COOKIE["CurrentUser"], ["allowed_classes" => ["Teacher", "Student"]]);
+} elseif (isset($_SESSION['current_user'])) {
+    $currentUser = &$_SESSION['current_user'];
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['sign-in'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
         $type = $_POST['type'];
-        // $password = md5($pass);
         if (Auth::validateEmail($email) and Auth::validatePassword($password)) {
             $currentUser = Auth::signIn($email, md5($password), $type);
             if (isset($currentUser)) {
                 if($_POST['remember']){
-                    setcookie("CurrentUser", $currentUser);
+                    setcookie("CurrentUser", serialize($currentUser), time()+60*60*24*30);
                 }
                 $_SESSION['current_user'] = &$currentUser;
-                header('Location: ../home.php');
+                header('Location: ../index.php');
                 exit;
             } else {
 

@@ -1,0 +1,217 @@
+* {
+    font-family: 'Arial';
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 100%;
+    background-color: white;
+    padding: 8px;
+    z-index: 1;
+}
+
+header>a {
+    float: left;
+    position: fixed;
+    z-index: 1;
+    margin-left: 4.5vw;
+    margin-right: 4.5vw;
+    height: 50px;
+    width: 109px;
+}
+
+header img {
+    float: left;
+    position: fixed;
+    height: 50px;
+    width: auto;
+}
+
+#menu-toggle,
+.hamburger {
+    display: none;
+}
+
+nav {
+    position: fixed;
+    width: 100%;
+    height: 66px;
+    top: 0;
+    left: 0;
+    box-shadow: 0 4px 8px rgba(127, 127, 127, 0.5);
+}
+
+nav ul {
+    float: right;
+    list-style-type: none;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    color: darkorange;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.125em;
+    font-weight: bold
+}
+
+nav a {
+    text-transform: uppercase;
+    display: inherit;
+    height: max-content;
+    width: max-content;
+    color: inherit;
+    text-decoration: inherit;
+    padding: 23px 1.5vw;
+}
+
+nav ul li:last-child a {
+    margin: 0 1.5vw;
+}
+
+nav a:hover {
+    background-color: darkorange;
+    color: white;
+}
+
+/* Responsiveness */
+
+@media screen and (max-width: 1024px) {
+    header>a {
+        margin-left: 3vw;
+        margin-right: 3vw;
+    }
+
+    nav ul li {
+        font-size: 1em;
+    }
+
+    nav a {
+        padding: 24px 1.3125vw;
+    }
+
+    nav ul li:last-child a {
+        margin: 0 1vw;
+    }
+}
+
+/* Tablet Screens */
+
+@media screen and (max-width: 800px) {
+
+    header {
+        height: 40px;
+    }
+
+    header>a {
+        margin-left: 0.5vw;
+        margin-right: 0.5vw;
+        height: 40px;
+        width: 87px;
+    }
+
+    header img {
+        height: 40px;
+    }
+
+    nav {
+        height: 56px;
+        box-shadow: 0 2px 4px rgba(127, 127, 127, 0.5);
+    }
+
+    nav ul li {
+        font-size: 0.875em;
+    }
+
+    nav a {
+        padding: 20px 1.25vw;
+    }
+
+    nav ul li:last-child a {
+        margin: 0;
+    }
+}
+
+/* Mobile Screens */
+
+@media screen and (max-width: 600px) {
+
+    .hamburger {
+        position: fixed;
+        display: inline-block;
+        padding: 6px 8px;
+        right: 8px;
+        border: 1px solid darkorange;
+        border-radius: 4px;
+        cursor: pointer;
+        z-index: 2;
+    }
+
+    .hamburger span {
+        display: block;
+        width: 24px;
+        height: 4px;
+        margin: 4px 0;
+        background-color: darkorange;
+        border-radius: 6px;
+        transition: 0.5s;
+    }
+
+    #menu-toggle:checked~.hamburger span:first-child {
+        transform: translateY(8px) rotate(-45deg);
+    }
+
+    #menu-toggle:checked~.hamburger span:nth-child(2) {
+        opacity: 0;
+    }
+
+    #menu-toggle:checked~.hamburger span:last-child {
+        transform: translateY(-8px) rotate(45deg);
+    }
+
+    #menu-toggle:checked~.hamburger {
+        background-color: darkorange;
+    }
+
+    #menu-toggle:checked~.hamburger span {
+        background-color: white;
+    }
+
+    nav ul li {
+        display: block;
+    }
+
+    nav ul li:not(:first-child) {
+        border-top: 1px solid darkorange;
+    }
+
+    nav a {
+        background-color: white;
+        width: 100%;
+        padding: 18px 0;
+    }
+
+    nav ul li:last-child a {
+        margin: 0;
+    }
+
+    nav ul {
+        display: none;
+        z-index: 1;
+    }
+
+    #menu-toggle:checked~nav ul {
+        display: initial;
+        position: fixed;
+        width: 100%;
+        float: none;
+        padding: 0;
+        margin-top: 56px;
+        box-shadow: 0 2px 4px rgba(127, 127, 127, 0.5);
+        border-radius: 0 0 6px 6px;
+    }
+}
